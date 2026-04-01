@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		843519712F7D61280003A034 /* project-Plan.md in Resources */ = {isa = PBXBuildFile; fileRef = 843519702F7D61280003A034 /* project-Plan.md */; };
+		843519802F7D61280003A034 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 843519812F7D61280003A034 /* AppIcon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		843519622F7D607C0003A034 /* Daily TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843519632F7D607C0003A034 /* Daily TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843519702F7D61280003A034 /* project-Plan.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "project-Plan.md"; sourceTree = "<group>"; };
+		843519812F7D61280003A034 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				843519702F7D61280003A034 /* project-Plan.md */,
+				843519812F7D61280003A034 /* AppIcon.icns */,
 				84010A4D2F7D54BE00878839 /* Daily Todo */,
 				84010A5B2F7D54C000878839 /* Daily TodoTests */,
 				84010A652F7D54C000878839 /* Daily TodoUITests */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843519712F7D61280003A034 /* project-Plan.md in Resources */,
+				843519802F7D61280003A034 /* AppIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +395,8 @@
 		84010A6D2F7D54C000878839 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASEETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -402,7 +406,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -424,8 +428,8 @@
 		84010A6E2F7D54C000878839 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASEETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -435,7 +439,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

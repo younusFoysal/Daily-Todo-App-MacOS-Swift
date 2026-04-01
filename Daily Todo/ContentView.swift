@@ -120,9 +120,16 @@ struct ContentView: View {
 
             Divider()
 
-            // ── Footer: Copy Button ──────────────────────────────────
+            // ── Footer: Copy Button + Version ───────────────────────
             HStack {
+                // Version info (left side)
+                Text("v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0")")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .padding(.leading, 14)
+
                 Spacer()
+
                 Button {
                     store.copyToClipboard()
                     withAnimation { copied = true }
@@ -144,7 +151,6 @@ struct ContentView: View {
             }
             .padding(.vertical, 10)
         }
-        .frame(width: 320, height: 480)
         .onAppear {
             addFieldFocused = true
             store.checkForNewDay()
