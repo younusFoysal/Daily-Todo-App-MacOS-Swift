@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		843519712F7D61280003A034 /* project-Plan.md in Resources */ = {isa = PBXBuildFile; fileRef = 843519702F7D61280003A034 /* project-Plan.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		84010A592F7D54C000878839 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		84010A4B2F7D54BE00878839 /* Daily Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		84010A582F7D54C000878839 /* Daily TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		84010A622F7D54C000878839 /* Daily TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		843519612F7D607C0003A034 /* Daily Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		843519622F7D607C0003A034 /* Daily TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		843519632F7D607C0003A034 /* Daily TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily TodoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		843519702F7D61280003A034 /* project-Plan.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "project-Plan.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,21 +80,14 @@
 		84010A422F7D54BE00878839 = {
 			isa = PBXGroup;
 			children = (
+				843519702F7D61280003A034 /* project-Plan.md */,
 				84010A4D2F7D54BE00878839 /* Daily Todo */,
 				84010A5B2F7D54C000878839 /* Daily TodoTests */,
 				84010A652F7D54C000878839 /* Daily TodoUITests */,
-				84010A4C2F7D54BE00878839 /* Products */,
+				843519612F7D607C0003A034 /* Daily Todo.app */,
+				843519622F7D607C0003A034 /* Daily TodoTests.xctest */,
+				843519632F7D607C0003A034 /* Daily TodoUITests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		84010A4C2F7D54BE00878839 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				84010A4B2F7D54BE00878839 /* Daily Todo.app */,
-				84010A582F7D54C000878839 /* Daily TodoTests.xctest */,
-				84010A622F7D54C000878839 /* Daily TodoUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +112,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Daily Todo";
-			productReference = 84010A4B2F7D54BE00878839 /* Daily Todo.app */;
+			productReference = 843519612F7D607C0003A034 /* Daily Todo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84010A572F7D54C000878839 /* Daily TodoTests */ = {
@@ -137,7 +135,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Daily TodoTests";
-			productReference = 84010A582F7D54C000878839 /* Daily TodoTests.xctest */;
+			productReference = 843519622F7D607C0003A034 /* Daily TodoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		84010A612F7D54C000878839 /* Daily TodoUITests */ = {
@@ -160,7 +158,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Daily TodoUITests";
-			productReference = 84010A622F7D54C000878839 /* Daily TodoUITests.xctest */;
+			productReference = 843519632F7D607C0003A034 /* Daily TodoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +194,7 @@
 			mainGroup = 84010A422F7D54BE00878839;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 84010A4C2F7D54BE00878839 /* Products */;
+			productRefGroup = 84010A422F7D54BE00878839;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -212,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843519712F7D61280003A034 /* project-Plan.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +402,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -435,6 +435,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

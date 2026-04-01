@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Daily_TodoApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+        // No windows — the app lives entirely in the menu bar via AppDelegate.
+        Settings { EmptyView() }
     }
 }
