@@ -14,8 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let store = TodoStore()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Set the programmatic app icon (shows in Spotlight, About dialog, Finder)
-        NSApp.applicationIconImage = .appIcon()
+        // Use the asset-catalog AppIcon; fall back to the code-drawn one if not embedded yet.
+        if let assetIcon = NSImage(named: "AppIcon") {
+            NSApp.applicationIconImage = assetIcon
+        } else {
+            NSApp.applicationIconImage = .appIcon()
+        }
 
         // 1. Create the status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
