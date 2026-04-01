@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var editingID: UUID? = nil
     @State private var editingText = ""
     @State private var copied = false
+    @State private var showClearConfirm = false
     @FocusState private var addFieldFocused: Bool
 
     private var formattedDate: String {
@@ -31,15 +32,24 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Daily Todo")
                         .font(.headline)
-                    Text(formattedDate)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 6) {
+                        Text(formattedDate)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        if !store.items.isEmpty {
+                            Text("·")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                            Text("\(store.items.count) task\(store.items.count == 1 ? "" : "s")")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
                 }
                 Spacer()
                 if !store.items.isEmpty {
                     Button(role: .destructive) {
-                        store.clearAll()
-                        editingID = nil
+                        showClearConfirm = true
                     } label: {
                         Image(systemName: "trash")
                             .foregroundStyle(.red.opacity(0.8))
@@ -135,7 +145,30 @@ struct ContentView: View {
             .padding(.vertical, 10)
         }
         .frame(width: 320, height: 480)
-        .onAppear { addFieldFocused = true }
+        .onAppear {
+            addFieldFocused = true
+            store.checkForNewDay()
+        }
+        .alert("Clear All Tasks?", isPresented: $showClearConfirm) {
+            Button("Clear All", role: .destructive) {
+                store.clearAll()
+                editingID = nil
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently remove all \(store.items.count) task\(store.items.count == 1 ? "" : "s").")
+        }
+        .alert("New Day ☀️", isPresented: $store.showNewDayPrompt) {
+            Button("Start Fresh", role: .destructive) {
+                store.startFreshToday()
+                editingID = nil
+            }
+            Button("Keep Tasks") {
+                store.keepYesterdayTasks()
+            }
+        } message: {
+            Text("You have \(store.items.count) unfinished task\(store.items.count == 1 ? "" : "s") from yesterday. Start fresh or keep them?")
+        }
     }
 
     private func submitNewTask() {
@@ -168,6 +201,7 @@ struct TaskRowView: View {
     let onDelete: () -> Void
 
     @FocusState private var rowFocused: Bool
+    @State private var isHovered = false
 
     private var isEditing: Bool { editingID == item.id }
 
@@ -209,9 +243,25 @@ struct TaskRowView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .opacity(isEditing ? 0 : 1)
+            .opacity(isHovered && !isEditing ? 1 : 0)
         }
-        .padding(.vertical, 3)
+        .padding(.vertical, 4)
+        .padding(.horizontal, 4)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .fill(isHovered && !isEditing ? Color.primary.opacity(0.06) : .clear)
+        )
+        .onHover { isHovered = $0 }
+        .contextMenu {
+            Button("Edit") {
+                editingID = item.id
+                editingText = item.title
+            }
+            Divider()
+            Button("Delete", role: .destructive) {
+                onDelete()
+            }
+        }
     }
 }
 

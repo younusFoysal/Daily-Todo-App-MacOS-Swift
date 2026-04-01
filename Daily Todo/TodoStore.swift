@@ -27,11 +27,32 @@ struct TodoItem: Identifiable, Codable, Equatable {
 @MainActor
 final class TodoStore: ObservableObject {
     @Published var items: [TodoItem] = []
+    /// Set to true when the app opens on a new calendar day and there are leftover tasks.
+    @Published var showNewDayPrompt = false
 
-    private let defaultsKey = "dailyTodo.items"
+    private let defaultsKey    = "dailyTodo.items"
+    private let lastDateKey    = "dailyTodo.lastSavedDate"
+
+    private var savedDayString: String {
+        get { UserDefaults.standard.string(forKey: lastDateKey) ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: lastDateKey) }
+    }
+
+    private var todayString: String {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        return f.string(from: Date())
+    }
 
     init() {
         load()
+        checkForNewDay()
+    }
+
+    // Called again each time the popover becomes visible
+    func checkForNewDay() {
+        guard !items.isEmpty, savedDayString != todayString else { return }
+        showNewDayPrompt = true
     }
 
     // MARK: CRUD
@@ -66,6 +87,20 @@ final class TodoStore: ObservableObject {
         save()
     }
 
+    /// Dismiss the new-day prompt and keep yesterday's tasks.
+    func keepYesterdayTasks() {
+        showNewDayPrompt = false
+        savedDayString = todayString
+    }
+
+    /// Dismiss the new-day prompt and start fresh.
+    func startFreshToday() {
+        items.removeAll()
+        showNewDayPrompt = false
+        savedDayString = todayString
+        save()
+    }
+
     // MARK: Copy EOD Report
 
     @discardableResult
@@ -90,6 +125,7 @@ final class TodoStore: ObservableObject {
     private func save() {
         guard let data = try? JSONEncoder().encode(items) else { return }
         UserDefaults.standard.set(data, forKey: defaultsKey)
+        savedDayString = todayString
     }
 
     private func load() {

@@ -14,12 +14,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let store = TodoStore()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Set the programmatic app icon (shows in Spotlight, About dialog, Finder)
+        NSApp.applicationIconImage = .appIcon()
+
         // 1. Create the status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "checklist", accessibilityDescription: "Daily Todo")
-            button.image?.isTemplate = true   // adapts to light / dark menu bar
+            // Use our custom drawn template icon; fall back to SF Symbol if drawing fails
+            let icon = NSImage.menuBarTemplateIcon(size: 18)
+            button.image = icon.size.width > 0 ? icon :
+                NSImage(systemSymbolName: "checklist", accessibilityDescription: "Daily Todo")
+            button.image?.isTemplate = true
             button.action = #selector(togglePopover)
             button.target = self
         }
