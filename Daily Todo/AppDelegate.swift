@@ -11,6 +11,7 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private var popover: NSPopover!
+    private let store = TodoStore()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // 1. Create the status bar item
@@ -23,13 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.target = self
         }
 
-        // 2. Create the popover
+        // 2. Create the popover, injecting the shared TodoStore
         popover = NSPopover()
         popover.contentSize = NSSize(width: 320, height: 480)
         popover.behavior = .transient            // closes when user clicks away
         popover.animates = true
         popover.contentViewController = NSHostingController(
-            rootView: ContentView()
+            rootView: ContentView().environmentObject(store)
         )
     }
 
