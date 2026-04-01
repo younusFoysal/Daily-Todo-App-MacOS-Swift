@@ -30,7 +30,7 @@ struct ContentView: View {
             // ── Header ──────────────────────────────────────────────
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Daily Todo")
+                    Text("RemoteIntegrity Daily Todo")
                         .font(.headline)
                     HStack(spacing: 6) {
                         Text(formattedDate)
@@ -73,7 +73,7 @@ struct ContentView: View {
                 Button(action: submitNewTask) {
                     Image(systemName: "plus.circle.fill")
                         .font(.title3)
-                        .foregroundStyle(newTaskText.trimmingCharacters(in: .whitespaces).isEmpty ? .secondary : .accentColor)
+                        .foregroundStyle(newTaskText.trimmingCharacters(in: .whitespaces).isEmpty ? AnyShapeStyle(.secondary) : AnyShapeStyle(Color.accentColor))
                 }
                 .buttonStyle(.plain)
                 .disabled(newTaskText.trimmingCharacters(in: .whitespaces).isEmpty)
@@ -135,7 +135,7 @@ struct ContentView: View {
                         systemImage: copied ? "checkmark" : "doc.on.clipboard"
                     )
                     .font(.callout)
-                    .foregroundStyle(store.items.isEmpty ? .secondary : .accentColor)
+                    .foregroundStyle(store.items.isEmpty ? AnyShapeStyle(.secondary) : AnyShapeStyle(Color.accentColor))
                 }
                 .buttonStyle(.plain)
                 .disabled(store.items.isEmpty)
