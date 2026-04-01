@@ -68,6 +68,7 @@ final class TodoStore: ObservableObject {
 
     // MARK: Copy EOD Report
 
+    @discardableResult
     func copyToClipboard() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"

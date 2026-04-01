@@ -87,12 +87,14 @@ struct ContentView: View {
                 Spacer()
             } else {
                 List {
-                    ForEach(store.items) { item in
+                    ForEach(Array(store.items.enumerated()), id: \.element.id) { index, item in
                         TaskRowView(
                             item: item,
+                            index: index,
                             editingID: $editingID,
                             editingText: $editingText,
                             onCommit: { commitEdit(id: item.id) },
+                            onCancel: { cancelEdit() },
                             onDelete: { store.delete(id: item.id) }
                         )
                         .listRowInsets(EdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 10))
@@ -112,7 +114,7 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 Button {
-                    _ = store.copyToClipboard()
+                    store.copyToClipboard()
                     withAnimation { copied = true }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         withAnimation { copied = false }
@@ -127,6 +129,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(store.items.isEmpty)
+                .keyboardShortcut("c", modifiers: [.command, .shift])
                 .padding(.trailing, 14)
             }
             .padding(.vertical, 10)
@@ -146,15 +149,22 @@ struct ContentView: View {
         editingID = nil
         editingText = ""
     }
+
+    private func cancelEdit() {
+        editingID = nil
+        editingText = ""
+    }
 }
 
 // MARK: - Task Row
 
 struct TaskRowView: View {
     let item: TodoItem
+    let index: Int
     @Binding var editingID: UUID?
     @Binding var editingText: String
     let onCommit: () -> Void
+    let onCancel: () -> Void
     let onDelete: () -> Void
 
     @FocusState private var rowFocused: Bool
@@ -163,17 +173,23 @@ struct TaskRowView: View {
 
     var body: some View {
         HStack(spacing: 6) {
-            // Row number
-            Text("\u{2022}")
+            // Row number (matches EOD report numbering)
+            Text("\(index + 1).")
+                .font(.caption)
                 .foregroundStyle(.secondary)
-                .frame(width: 12)
+                .frame(width: 20, alignment: .trailing)
 
             if isEditing {
                 TextField("", text: $editingText)
                     .textFieldStyle(.plain)
                     .focused($rowFocused)
                     .onSubmit { onCommit() }
+                    .onExitCommand { onCancel() }   // Escape cancels
                     .onAppear { rowFocused = true }
+                    // Commit when the field loses focus (user clicked elsewhere)
+                    .onChange(of: rowFocused) { _, focused in
+                        if !focused { onCommit() }
+                    }
             } else {
                 Text(item.title)
                     .lineLimit(2)
