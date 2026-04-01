@@ -122,7 +122,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             popover.performClose(nil)
         } else {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-            popover.contentViewController?.view.window?.makeKey()
+            // Allow the popover to appear over full-screen apps and in all Spaces
+            if let popoverWindow = popover.contentViewController?.view.window {
+                popoverWindow.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+                popoverWindow.makeKey()
+            }
         }
     }
 
