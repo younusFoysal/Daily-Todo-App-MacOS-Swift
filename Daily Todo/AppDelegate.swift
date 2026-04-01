@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered,
             defer: false
         )
-        window.title = "Daily Todo"
+        window.title = "RemoteIntegrity Daily Todo"
         window.minSize = NSSize(width: 360, height: 400)
         window.center()
         window.isReleasedWhenClosed = false

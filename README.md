@@ -76,17 +76,26 @@ Run this after completing the build above:
 ```bash
 APP="/tmp/DailyTodoBuild/Build/Products/Release/Daily Todo.app"
 DMG="/Volumes/Cloude/Xcode/Daily Todo/Daily Todo.dmg"
+STAGING="$(mktemp -d)/Daily Todo"
+
+# Stage the app + Applications symlink so users can drag-and-drop to install
+mkdir -p "$STAGING"
+cp -R "$APP" "$STAGING/"
+ln -s /Applications "$STAGING/Applications"
 
 # Remove old DMG if it exists
 rm -f "$DMG"
 
-# Create the DMG
+# Create the DMG from the staging folder
 hdiutil create \
   -volname "Daily Todo" \
-  -srcfolder "$APP" \
+  -srcfolder "$STAGING" \
   -ov \
   -format UDZO \
   "$DMG"
+
+# Clean up staging
+rm -rf "$(dirname "$STAGING")"
 
 echo "DMG created: $DMG"
 ```
